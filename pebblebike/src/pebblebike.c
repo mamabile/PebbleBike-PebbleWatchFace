@@ -276,8 +276,8 @@ void handle_init(AppContextRef ctx) {
   GFont font_24 = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_ROBOTO_BOLD_24));
   
   // set default unit of measure
-  strncpy(s_data.unitsSpeed, SPEED_UNIT_IMPERIAL, 8);
-  strncpy(s_data.unitsDistance, DISTANCE_UNIT_IMPERIAL, 8);
+  strncpy(s_data.unitsSpeed, SPEED_UNIT_METRIC, 8);        //was SPEED_UNIT_IMPERIAL
+  strncpy(s_data.unitsDistance, DISTANCE_UNIT_METRIC, 8);   //was DISTANCE_UNIT_IMPERIAL 
   
   heap_bitmap_init(&start_button,RESOURCE_ID_IMAGE_START_BUTTON);
   heap_bitmap_init(&stop_button,RESOURCE_ID_IMAGE_STOP_BUTTON);
@@ -376,7 +376,7 @@ void handle_init(AppContextRef ctx) {
     TupletCString(DISTANCE_TEXT, "0.0"),
     TupletCString(AVGSPEED_TEXT, "0.0"),
     TupletInteger(STATE_CHANGED,STATE_STOP), //stopped
-    TupletInteger(MEASUREMENT_UNITS,UNITS_IMPERIAL), //stopped
+    TupletInteger(MEASUREMENT_UNITS,UNITS_METRIC), //stopped  was UNITS_IMPERIAL
   };
 
   app_sync_init(&s_data.sync, s_data.sync_buffer, sizeof(s_data.sync_buffer), initial_values, ARRAY_LENGTH(initial_values),
