@@ -104,8 +104,13 @@ void speed_layer_update_proc(SpeedLayer *speed_layer, GContext* ctx) {
   graphics_fill_rect(app_get_current_graphics_context(), layer_get_frame(&speed_layer->layer), 0, GCornerNone);
 
   if (speed_layer->text && strlen(speed_layer->text) > 0) {
+
+    float speedMilesHr = atof(speed_layer->text);  //convert to float
+    float speedKmHr = speedMilesHr * 1.609344;     //convert to Km/Hr 
+    char *speedKmHr;
+    sprintf(speedStr,"%2.1f",speedKmHr);
     
-    int len = strlen(speed_layer->text);
+    int len = strlen(speedKmHr);  //was speed_layer->text
 
     if(len > 4)
       return;
@@ -132,10 +137,10 @@ void speed_layer_update_proc(SpeedLayer *speed_layer, GContext* ctx) {
     for(int c=0; c < len; c++) {
 
       int digit_value = -1;
-      if(speed_layer->text[c] == '.') {
+      if(speedKmHr[c] == '.') {    //was if(speed_layer->text[c] == '.')
         digit_value = 10;
       } else {
-        digit_value = speed_layer->text[c] - '0';
+        digit_value = speedKmHr[c] - '0';   //was digit_value = speed_layer->text[c] - '0';
       }
       
       if(digit_value >=0 && digit_value < 11) {
